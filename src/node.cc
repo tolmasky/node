@@ -3712,7 +3712,11 @@ int Start(int argc, char** argv) {
       StartDebug(env, debug_wait_connect);
 
     LoadEnvironment(env);
-
+      Local<Value> args[] = {
+        FIXED_ONE_BYTE_STRING(env->isolate(), "done_"),
+      Integer::NewFromUnsigned(env->isolate(), 1)
+    };
+  MakeCallback(env, env->process_object(), "emit", ARRAY_SIZE(args), args);
     // Enable debugger
     if (use_debug_agent)
       EnableDebug(env);
