@@ -3728,7 +3728,7 @@ int Start(int argc, char** argv) {
         FIXED_ONE_BYTE_STRING(env->isolate(), "done_"),
       Integer::NewFromUnsigned(env->isolate(), 1)
     };
-  MakeCallback(env, env->process_object(), "emit", ARRAY_SIZE(arg2s), args2);
+  MakeCallback(env, env->process_object(), "emit", ARRAY_SIZE(args2), args2);
       more = uv_run(env->event_loop(), UV_RUN_ONCE);
       printf("f: %d\n", more);
       
