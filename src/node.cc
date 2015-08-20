@@ -200,12 +200,15 @@ static void CheckImmediate(uv_check_t* handle) {
   HandleScope scope(env->isolate());
   Context::Scope context_scope(env->context());
   MakeCallback(env, env->process_object(), env->immediate_callback_string());
+  MakeCallback(env, env->process_object(), "check_immediate");
 }
 
 
 static void IdleImmediateDummy(uv_idle_t* handle) {
   // Do nothing. Only for maintaining event loop.
   // TODO(bnoordhuis) Maybe make libuv accept NULL idle callbacks.
+  //Environment* env = ContainerOf(&Environment::immediate_check_handle_, handle);
+  //MakeCallback(env, env->process_object(), "check_immediate_d");
 }
 
 
