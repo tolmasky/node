@@ -3721,7 +3721,6 @@ int Start(int argc, char** argv) {
     if (use_debug_agent)
       EnableDebug(env);
 bool is_alive = uv_loop_alive(env->event_loop());
-    LoadEnvironment(env);
       Local<Value> args3[] = {
         FIXED_ONE_BYTE_STRING(env->isolate(), "isali"),
       Integer::NewFromUnsigned(env->isolate(), 1)
