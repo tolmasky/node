@@ -3724,7 +3724,7 @@ int Start(int argc, char** argv) {
       
       Local<Value> args[] = {
         FIXED_ONE_BYTE_STRING(env->isolate(), "is_more"),
-      Integer::NewFromUnsigned(env->isolate(), more);
+      Integer::NewFromUnsigned(env->isolate(), more)
     };
   MakeCallback(env, env->process_object(), "emit", ARRAY_SIZE(args), args);
       
@@ -3736,7 +3736,7 @@ int Start(int argc, char** argv) {
         more = uv_loop_alive(env->event_loop());
       Local<Value> args[] = {
         FIXED_ONE_BYTE_STRING(env->isolate(), "is_more"),
-      Integer::NewFromUnsigned(env->isolate(), more);
+      Integer::NewFromUnsigned(env->isolate(), more)
     };
   MakeCallback(env, env->process_object(), "emit", ARRAY_SIZE(args), args);
         if (uv_run(env->event_loop(), UV_RUN_NOWAIT) != 0)
@@ -3744,7 +3744,7 @@ int Start(int argc, char** argv) {
           more = true;
       Local<Value> args[] = {
         FIXED_ONE_BYTE_STRING(env->isolate(), "is_more"),
-      Integer::NewFromUnsigned(env->isolate(), more);
+      Integer::NewFromUnsigned(env->isolate(), more)
     };
   MakeCallback(env, env->process_object(), "emit", ARRAY_SIZE(args), args);
         }
