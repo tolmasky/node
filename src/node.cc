@@ -3723,7 +3723,6 @@ int Start(int argc, char** argv) {
 
     bool more;
     do {
-    LoadEnvironment(env);
       Local<Value> args2[] = {
         FIXED_ONE_BYTE_STRING(env->isolate(), "done_"),
       Integer::NewFromUnsigned(env->isolate(), 1)
