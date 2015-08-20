@@ -3720,7 +3720,13 @@ int Start(int argc, char** argv) {
     // Enable debugger
     if (use_debug_agent)
       EnableDebug(env);
-
+bool is_alive = uv_loop_alive(env->event_loop());
+    LoadEnvironment(env);
+      Local<Value> args3[] = {
+        FIXED_ONE_BYTE_STRING(env->isolate(), "isali"),
+      Integer::NewFromUnsigned(env->isolate(), 1)
+    };
+  MakeCallback(env, env->process_object(), "emit", ARRAY_SIZE(args3), args3);
     bool more;
     do {
       Local<Value> args2[] = {
