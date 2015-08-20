@@ -3720,14 +3720,19 @@ int Start(int argc, char** argv) {
     bool more;
     do {
       more = uv_run(env->event_loop(), UV_RUN_ONCE);
+      printf("f: %d\n", more);
       if (more == false) {
         EmitBeforeExit(env);
 
         // Emit `beforeExit` if the loop became alive either after emitting
         // event, or after running some callbacks.
         more = uv_loop_alive(env->event_loop());
+        printf("s: %d\n", more);
         if (uv_run(env->event_loop(), UV_RUN_NOWAIT) != 0)
+        {
           more = true;
+          printf("t: %d\n", more);
+        }
       }
     } while (more == true);
     code = EmitExit(env);
