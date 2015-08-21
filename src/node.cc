@@ -3733,7 +3733,7 @@ int Start(int argc, char** argv) {
     if (use_debug_agent)
       EnableDebug(env);
       
-    message(eng, uv_loop_alive(env->event_loop()) ? "is alive 1" : "is alive 0");
+    message(env, uv_loop_alive(env->event_loop()) ? "is alive 1" : "is alive 0");
 
     bool more;
     do {
