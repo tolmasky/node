@@ -3743,7 +3743,13 @@ int Start(int argc, char** argv) {
         message(env, "1");
         uv_run_timers(env->event_loop());
         message(env, "2");
-        
+    uv_run_pending(loop);
+    message(env, "3");
+    uv_run_idle(loop);
+    message(env, "4");
+    uv_run_prepare(loop);
+    message(env, "5");
+
       more = uv_run(env->event_loop(), UV_RUN_ONCE);
 
     message(env, more ? "has more" : "no more");
