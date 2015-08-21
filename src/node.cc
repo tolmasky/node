@@ -3663,6 +3663,17 @@ Environment* CreateEnvironment(Isolate* isolate,
   return env;
 }
 
+int message(Environment* env, const char * msg)
+{
+    Local<Value> args[] =
+    {
+      FIXED_ONE_BYTE_STRING(env->isolate(), "msg"),
+      FIXED_ONE_BYTE_STRING(env->isolate(), msg)
+    };
+    env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args), args);
+    return 0;
+}
+
 
 int Start(int argc, char** argv) {
   const char* replaceInvalid = getenv("NODE_INVALID_UTF8");
@@ -3715,35 +3726,21 @@ int Start(int argc, char** argv) {
       StartDebug(env, debug_wait_connect);
 
     LoadEnvironment(env);
-      Local<Value> args[] = {
-        FIXED_ONE_BYTE_STRING(env->isolate(), "done_"),
-      Integer::NewFromUnsigned(env->isolate(), 1)
-    };
-  env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args), args);
+    
+    message(env, "done loading environment");
+
     // Enable debugger
     if (use_debug_agent)
       EnableDebug(env);
-bool is_alive = uv_loop_alive(env->event_loop());
-      Local<Value> args3[] = {
-        FIXED_ONE_BYTE_STRING(env->isolate(), "isali"),
-      Integer::NewFromUnsigned(env->isolate(), 1)
-    };
-  env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args3), args3);
+      
+    message(eng, uv_loop_alive(env->event_loop() ? "is alive 1" : "is alive 0");
+
     bool more;
     do {
-      Local<Value> args2[] = {
-        FIXED_ONE_BYTE_STRING(env->isolate(), "done_"),
-      Integer::NewFromUnsigned(env->isolate(), 1)
-    };
-  env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args2), args2);
+        message(env, "in do loop done");
       more = uv_run(env->event_loop(), UV_RUN_ONCE);
-      printf("f: %d\n", more);
-      
-      Local<Value> args[] = {
-        FIXED_ONE_BYTE_STRING(env->isolate(), "is_more"),
-      Integer::NewFromUnsigned(env->isolate(), more)
-    };
-      env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args), args);
+
+    message(env, more ? "has more" : "no more");
       
       if (more == false) {
         EmitBeforeExit(env);
@@ -3751,19 +3748,13 @@ bool is_alive = uv_loop_alive(env->event_loop());
         // Emit `beforeExit` if the loop became alive either after emitting
         // event, or after running some callbacks.
         more = uv_loop_alive(env->event_loop());
-      Local<Value> args[] = {
-        FIXED_ONE_BYTE_STRING(env->isolate(), "is_more"),
-      Integer::NewFromUnsigned(env->isolate(), more)
-    };
-  env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args), args);
+
+        message(env, more ? "has more" : "no more");
+
         if (uv_run(env->event_loop(), UV_RUN_NOWAIT) != 0)
         {
           more = true;
-      Local<Value> args[] = {
-        FIXED_ONE_BYTE_STRING(env->isolate(), "is_more"),
-      Integer::NewFromUnsigned(env->isolate(), more)
-    };
-  env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args), args);
+            message(env, more ? "has more" : "no more");
         }
       }
     } while (more == true);
