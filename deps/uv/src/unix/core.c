@@ -361,6 +361,10 @@ void uv_update_time(uv_loop_t* loop) {
   uv__update_time(loop);
 }
 
+void uv_run_timers(uv_loop_t* loop) {
+  uv__run_timers(loop);
+}
+
 
 int uv_is_active(const uv_handle_t* handle) {
   return uv__is_active(handle);
