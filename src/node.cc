@@ -3738,6 +3738,10 @@ int Start(int argc, char** argv) {
     bool more;
     do {
         message(env, "in do loop done");
+
+        uv_update_time(env->event_loop());        
+        message(env, "1");
+        
       more = uv_run(env->event_loop(), UV_RUN_ONCE);
 
     message(env, more ? "has more" : "no more");
