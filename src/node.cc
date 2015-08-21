@@ -3743,11 +3743,11 @@ int Start(int argc, char** argv) {
         message(env, "1");
         uv_run_timers(env->event_loop());
         message(env, "2");
-    uv_run_pending(loop);
+    uv_run_pending(env->event_loop());
     message(env, "3");
-    uv_run_idle(loop);
+    uv_run_idle(env->event_loop());
     message(env, "4");
-    uv_run_prepare(loop);
+    uv_run_prepare(env->event_loop());
     message(env, "5");
 
       more = uv_run(env->event_loop(), UV_RUN_ONCE);
