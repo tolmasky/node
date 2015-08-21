@@ -200,7 +200,7 @@ static void CheckImmediate(uv_check_t* handle) {
   HandleScope scope(env->isolate());
   Context::Scope context_scope(env->context());
   MakeCallback(env, env->process_object(), env->immediate_callback_string());
-  MakeCallback(env, env->process_object(), "check_immediate");
+//  MakeCallback(env, env->process_object(), "check_immediate");
 }
 
 

@@ -343,6 +343,7 @@
     // Run callbacks that have no domain.
     // Using domains will cause this to be overridden.
     function _tickCallback() {
+    process.emit("_tickCallback");
       var callback, threw, tock;
 
       scheduleMicrotasks();
@@ -366,6 +367,7 @@
     }
 
     function _tickDomainCallback() {
+    process.emit("_tickDomainCallback");
       var callback, domain, threw, tock;
 
       scheduleMicrotasks();
