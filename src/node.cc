@@ -52,6 +52,7 @@
 #include "req_wrap.h"
 #include "string_bytes.h"
 #include "util.h"
+#include "internal.h"
 #include "uv.h"
 #include "v8-debug.h"
 #include "v8-profiler.h"
