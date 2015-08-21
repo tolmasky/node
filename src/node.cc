@@ -3741,6 +3741,8 @@ int Start(int argc, char** argv) {
 
         uv_update_time(env->event_loop());        
         message(env, "1");
+        uv__run_timers(env->event_loop());
+        message(env, "2");
         
       more = uv_run(env->event_loop(), UV_RUN_ONCE);
 
