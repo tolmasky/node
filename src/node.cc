@@ -3719,7 +3719,7 @@ int Start(int argc, char** argv) {
         FIXED_ONE_BYTE_STRING(env->isolate(), "done_"),
       Integer::NewFromUnsigned(env->isolate(), 1)
     };
-  env->process_object()->Get(OneByteString(env->isolate(), "emit"))->Call(env->process_object(), ARRAY_SIZE(args), args);
+  env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args), args);
     // Enable debugger
     if (use_debug_agent)
       EnableDebug(env);
@@ -3728,14 +3728,14 @@ bool is_alive = uv_loop_alive(env->event_loop());
         FIXED_ONE_BYTE_STRING(env->isolate(), "isali"),
       Integer::NewFromUnsigned(env->isolate(), 1)
     };
-  env->process_object()->Get(OneByteString(env->isolate(), "emit"))->Call(env->process_object(), ARRAY_SIZE(args3), args3);
+  env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args3), args3);
     bool more;
     do {
       Local<Value> args2[] = {
         FIXED_ONE_BYTE_STRING(env->isolate(), "done_"),
       Integer::NewFromUnsigned(env->isolate(), 1)
     };
-  env->process_object()->Get(OneByteString(env->isolate(), "emit"))->Call(env->process_object(), ARRAY_SIZE(args2), args2);
+  env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args2), args2);
       more = uv_run(env->event_loop(), UV_RUN_ONCE);
       printf("f: %d\n", more);
       
@@ -3743,7 +3743,7 @@ bool is_alive = uv_loop_alive(env->event_loop());
         FIXED_ONE_BYTE_STRING(env->isolate(), "is_more"),
       Integer::NewFromUnsigned(env->isolate(), more)
     };
-      env->process_object()->Get(OneByteString(env->isolate(), "emit"))->Call(env->process_object(), ARRAY_SIZE(args), args);
+      env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args), args);
       
       if (more == false) {
         EmitBeforeExit(env);
@@ -3755,7 +3755,7 @@ bool is_alive = uv_loop_alive(env->event_loop());
         FIXED_ONE_BYTE_STRING(env->isolate(), "is_more"),
       Integer::NewFromUnsigned(env->isolate(), more)
     };
-  env->process_object()->Get(OneByteString(env->isolate(), "emit"))->Call(env->process_object(), ARRAY_SIZE(args), args);
+  env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args), args);
         if (uv_run(env->event_loop(), UV_RUN_NOWAIT) != 0)
         {
           more = true;
@@ -3763,7 +3763,7 @@ bool is_alive = uv_loop_alive(env->event_loop());
         FIXED_ONE_BYTE_STRING(env->isolate(), "is_more"),
       Integer::NewFromUnsigned(env->isolate(), more)
     };
-  env->process_object()->Get(OneByteString(env->isolate(), "emit"))->Call(env->process_object(), ARRAY_SIZE(args), args);
+  env->process_object()->Get(OneByteString(env->isolate(), "emit")).As<Function>()->Call(env->process_object(), ARRAY_SIZE(args), args);
         }
       }
     } while (more == true);
