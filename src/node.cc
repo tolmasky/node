@@ -3744,7 +3744,7 @@ int Start(int argc, char** argv) {
         message(env, "1");
         uv_run_timers(env->event_loop());
         message(env, "2");
-    uv_run_pending(env->event_loop(), print, env);
+    uv_run_pending(env->event_loop(), (void *)print, env);
     message(env, "3");
     uv_run_idle(env->event_loop());
     message(env, "4");
