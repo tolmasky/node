@@ -3674,6 +3674,7 @@ int message(Environment* env, const char * msg)
     return 0;
 }
 
+int print(void *);
 
 int Start(int argc, char** argv) {
   const char* replaceInvalid = getenv("NODE_INVALID_UTF8");
@@ -3747,7 +3748,7 @@ int Start(int argc, char** argv) {
     message(env, "3");
     uv_run_idle(env->event_loop());
     message(env, "4");
-    uv_run_prepare(env->event_loop());
+    uv_run_prepare(env->event_loop(), print, env);
     message(env, "5");
 
       more = uv_run(env->event_loop(), UV_RUN_ONCE);
@@ -3786,6 +3787,11 @@ int Start(int argc, char** argv) {
   exec_argv = NULL;
 
   return code;
+}
+
+int print(void * env)
+{
+    message(env, "ine1");
 }
 
 

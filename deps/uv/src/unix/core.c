@@ -365,10 +365,6 @@ void uv_run_timers(uv_loop_t* loop) {
   uv__run_timers(loop);
 }
 
-void uv_run_pending(uv_loop_t* loop) {
-    uv__run_pending(loop);
-}
-
 void uv_run_idle(uv_loop_t* loop) {
     uv__run_idle(loop);
 }
@@ -712,6 +708,30 @@ int uv_fileno(const uv_handle_t* handle, uv_os_fd_t* fd) {
   return 0;
 }
 
+typedef int (*compare_cb)(void *);
+
+static int uv_run_pending(uv_loop_t* loop, compare_cb * call, void * in) {
+  QUEUE* q;
+  QUEUE pq;
+  uv__io_t* w;
+  compare_cb(in);
+  if (QUEUE_EMPTY(&loop->pending_queue))
+    return 0;
+
+  QUEUE_INIT(&pq);
+  q = QUEUE_HEAD(&loop->pending_queue);
+  QUEUE_SPLIT(&loop->pending_queue, q, &pq);
+
+  while (!QUEUE_EMPTY(&pq)) {
+    q = QUEUE_HEAD(&pq);
+    QUEUE_REMOVE(q);
+    QUEUE_INIT(q);
+    w = QUEUE_DATA(q, uv__io_t, pending_queue);
+    w->cb(loop, w, UV__POLLOUT);
+  }
+
+  return 1;
+}
 
 static int uv__run_pending(uv_loop_t* loop) {
   QUEUE* q;
