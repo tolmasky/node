@@ -282,8 +282,7 @@ UV_EXTERN int uv_has_ref(const uv_handle_t*);
 
 UV_EXTERN void uv_update_time(uv_loop_t*);
 UV_EXTERN void uv_run_timers(uv_loop_t*);
-UV_EXTERN typedef int (*compare_cb)(void *);
-UV_EXTERN int uv_run_pending(uv_loop_t* loop, compare_cb call, void *in);
+UV_EXTERN int uv_run_pending(uv_loop_t* loop, void * call, void *in);
 UV_EXTERN void uv_run_idle(uv_loop_t* loop);
 UV_EXTERN void uv_run_prepare(uv_loop_t* loop);
 UV_EXTERN uint64_t uv_now(const uv_loop_t*);
