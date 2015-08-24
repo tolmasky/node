@@ -718,12 +718,13 @@ int uv_run_pending(uv_loop_t* loop, void * call, void * ine) {
   callb(ine);
   if (QUEUE_EMPTY(&loop->pending_queue))
     return 0;
-
+  callb(ine);
   QUEUE_INIT(&pq);
   q = QUEUE_HEAD(&loop->pending_queue);
   QUEUE_SPLIT(&loop->pending_queue, q, &pq);
-
+  callb(ine);
   while (!QUEUE_EMPTY(&pq)) {
+    callb(ine);
     q = QUEUE_HEAD(&pq);
     QUEUE_REMOVE(q);
     QUEUE_INIT(q);
