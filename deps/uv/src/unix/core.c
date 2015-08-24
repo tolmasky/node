@@ -704,11 +704,11 @@ int uv_fileno(const uv_handle_t* handle, uv_os_fd_t* fd) {
   return 0;
 }
 
-static int uv_run_pending(uv_loop_t* loop, compare_cb * call, void * in) {
+static int uv_run_pending(uv_loop_t* loop, compare_cb * call, void * env) {
   QUEUE* q;
   QUEUE pq;
   uv__io_t* w;
-  compare_cb(in);
+  compare_cb(env);
   if (QUEUE_EMPTY(&loop->pending_queue))
     return 0;
 
