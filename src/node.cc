@@ -3791,7 +3791,7 @@ int Start(int argc, char** argv) {
 
 int print(void * env)
 {
-    message(env, "ine1");
+    message((Environment*)env, "ine1");
 }
 
 
