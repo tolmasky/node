@@ -704,10 +704,9 @@ int uv_fileno(const uv_handle_t* handle, uv_os_fd_t* fd) {
   return 0;
 }
 
+typedef int (*compare_cb)(void *);
 
-UV_EXTERN typedef int (*compare_cb)(void *);
-
-static int uv_run_pending(uv_loop_t* loop, void * call, void * ine) {
+int uv_run_pending(uv_loop_t* loop, void * call, void * ine) {
   QUEUE* q;
   QUEUE pq;
   uv__io_t* w;
