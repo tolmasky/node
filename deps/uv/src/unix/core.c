@@ -369,6 +369,10 @@ void uv_run_idle(uv_loop_t* loop) {
     uv__run_idle(loop);
 }
 
+void uv_run_prepare(uv_loop_t* loop) {
+    uv__run_prepare(loop);
+}
+
 int uv_is_active(const uv_handle_t* handle) {
   return uv__is_active(handle);
 }
