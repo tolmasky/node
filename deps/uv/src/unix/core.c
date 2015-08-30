@@ -897,8 +897,10 @@ void uv__io_close(uv_loop_t* loop, uv__io_t* w) {
 
 
 void uv__io_feed(uv_loop_t* loop, uv__io_t* w) {
-  if (QUEUE_EMPTY(&w->pending_queue))
+  if (QUEUE_EMPTY(&w->pending_queue)) {
+  printf("ADDING TO LOOP HERE");
     QUEUE_INSERT_TAIL(&loop->pending_queue, &w->pending_queue);
+}
 }
 
 
