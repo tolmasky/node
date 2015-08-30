@@ -151,7 +151,7 @@ void uv_pipe_connect(uv_connect_t* req,
   int new_sock;
   int err;
   int r;
-
+printf("SOMEHOW\n");
   new_sock = (uv__stream_fd(handle) == -1);
 
   if (new_sock) {

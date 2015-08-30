@@ -698,7 +698,7 @@ static size_t uv__write_req_size(uv_write_t* req) {
 
 static void uv__write_req_finish(uv_write_t* req) {
   uv_stream_t* stream = req->handle;
-
+printf("UKL MOEK\n");
   /* Pop the req off tcp->write_queue. */
   QUEUE_REMOVE(&req->queue);
 
