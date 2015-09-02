@@ -887,6 +887,7 @@ start:
           /* Then we're done! */
           assert(n == 0);
           printf("FD\n");
+          printf("%d\n", uv__stream_fd(stream));
           uv__write_req_finish(req);
           /* TODO: start trying to write the next request. */
           return;
