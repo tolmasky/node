@@ -835,6 +835,7 @@ start:
     if (errno != EAGAIN && errno != EWOULDBLOCK) {
       /* Error */
       req->error = -errno;
+      printf("FINISHED WRITE\n");
       uv__write_req_finish(req);
       uv__io_stop(stream->loop, &stream->io_watcher, UV__POLLOUT);
       if (!uv__io_active(&stream->io_watcher, UV__POLLIN))
@@ -885,6 +886,7 @@ start:
         if (req->write_index == req->nbufs) {
           /* Then we're done! */
           assert(n == 0);
+          printf("FD\n");
           uv__write_req_finish(req);
           /* TODO: start trying to write the next request. */
           return;
