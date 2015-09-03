@@ -3733,7 +3733,11 @@ int Start(int argc, char** argv) {
     // Enable debugger
     if (use_debug_agent)
       EnableDebug(env);
-      
+    
+    message(env, (loop)->active_handles > 0 ? "ah" : "nah");
+//    message(env, (QUEUE_EMPTY(&(loop)->active_reqs) == 0) ? "ar" : "nra");
+    message(env, loop->closing_handles != NULL ? "ac" : "nca");
+
     message(env, uv_loop_alive(env->event_loop()) ? "is alive 1" : "is alive 0");
 
     bool more;
